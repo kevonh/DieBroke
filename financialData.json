@@ -1,0 +1,331 @@
+{
+  "Scenarios": [
+    {
+      "Name": "One Kind of Scenario",
+      "BirthDate": "1980-01-01",
+      "ExpectedLifespanYears": 95,
+      "InflationRate": 0.04,
+      "AdjustForInflation": true,
+      "CashBuffer": 30000,
+      "CashBufferMinimum": 20000,
+      "CashBufferMaximum": 50000,
+      "TaxFilingStatus": "MarriedFilingJointly",
+      "StandardDeduction": 24800,
+      "CapitalGainsTaxRate": 0.2,
+      "InvestmentVehicles": [
+        {
+          "Name": "Low Risk",
+          "RateOfReturn": 0.04,
+          "RiskLevel": 2,
+          "CurrentBalance": 200000,
+          "WaterfallToleranceMonths": 12,
+          "TransitionPeriodMonths": 12
+        },
+        {
+          "Name": "Mid Risk",
+          "RateOfReturn": 0.08,
+          "RiskLevel": 3,
+          "CurrentBalance": 200000,
+          "WaterfallToleranceMonths": 36,
+          "TransitionPeriodMonths": 12
+        },
+        {
+          "Name": "High Risk",
+          "RateOfReturn": 0.12,
+          "RiskLevel": 4,
+          "CurrentBalance": 300000,
+          "WaterfallToleranceMonths": 60,
+          "TransitionPeriodMonths": 12
+        },
+        {
+          "Name": "House Value",
+          "RateOfReturn": 0.04,
+          "RiskLevel": 1,
+          "CurrentBalance": 850000,
+          "WaterfallToleranceMonths": 1,
+          "TransitionPeriodMonths": 1
+        }
+      ],
+      "CapitalChangeEvents": [
+        {
+          "Name": "Monthly Budget",
+          "Amount": -8000.00,
+          "Frequency": "Monthly",
+          "ChangeType": "Expense"
+        },
+        {
+          "Name": "Travel",
+          "Amount": -7500.00,
+          "Frequency": "Quarterly",
+          "ChangeType": "Expense",
+          "EndDate": "2051-03-01"
+        },
+        {
+          "Name": "Gross Salary",
+          "Amount": 10000.00,
+          "Frequency": "Monthly",
+          "EndDate": "2024-03-01",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Annuity",
+          "Amount": 570.00,
+          "Frequency": "Monthly",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Social Security",
+          "Amount": 3514.00,
+          "Frequency": "Monthly",
+          "StartDate": "2038-06-01",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Social Security",
+          "Amount": 2842.00,
+          "Frequency": "Monthly",
+          "StartDate": "2040-07-01",
+          "ChangeType": "RegularIncome"
+        }
+      ],
+      "TaxBrackets": [
+        {
+          "FilingStatus": "Single",
+          "TaxableIncomeBrackets": [
+            {
+              "LowerBound": 0,
+              "UpperBound": 9950,
+              "Rate": 0.1
+            },
+            {
+              "LowerBound": 9950,
+              "UpperBound": 40525,
+              "Rate": 0.12
+            },
+            {
+              "LowerBound": 40525,
+              "UpperBound": 86375,
+              "Rate": 0.22
+            },
+            {
+              "LowerBound": 86375,
+              "UpperBound": 164925,
+              "Rate": 0.24
+            },
+            {
+              "LowerBound": 164925,
+              "UpperBound": 209425,
+              "Rate": 0.32
+            },
+            {
+              "LowerBound": 209425,
+              "UpperBound": 523600,
+              "Rate": 0.35
+            },
+            {
+              "LowerBound": 523600,
+              "UpperBound": 769050,
+              "Rate": 0.37
+            }
+          ]
+        },
+        {
+          "FilingStatus": "MarriedFilingJointly",
+          "TaxableIncomeBrackets": [
+            {
+              "LowerBound": 0,
+              "UpperBound": 19900,
+              "Rate": 0.1
+            },
+            {
+              "LowerBound": 19900,
+              "UpperBound": 81050,
+              "Rate": 0.12
+            },
+            {
+              "LowerBound": 81050,
+              "UpperBound": 172750,
+              "Rate": 0.22
+            },
+            {
+              "LowerBound": 172750,
+              "UpperBound": 329850,
+              "Rate": 0.24
+            },
+            {
+              "LowerBound": 329850,
+              "UpperBound": 418850,
+              "Rate": 0.32
+            },
+            {
+              "LowerBound": 418850,
+              "UpperBound": 628300,
+              "Rate": 0.35
+            },
+            {
+              "LowerBound": 628300,
+              "UpperBound": 1000000,
+              "Rate": 0.37
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "A Different Scenario",
+      "BirthDate": "1980-01-01",
+      "ExpectedLifespanYears": 85,
+      "InflationRate": 0.04,
+      "AdjustForInflation": true,
+      "CashBuffer": 30000,
+      "CashBufferMinimum": 20000,
+      "CashBufferMaximum": 50000,
+      "TaxFilingStatus": "MarriedFilingJointly",
+      "StandardDeduction": 24800,
+      "CapitalGainsTaxRate": 0.2,
+      "InvestmentVehicles": [
+        {
+          "Name": "High Risk",
+          "RateOfReturn": 0.12,
+          "RiskLevel": 4,
+          "CurrentBalance": 900000,
+          "WaterfallToleranceMonths": 60,
+          "TransitionPeriodMonths": 12
+        },
+        {
+          "Name": "House Value",
+          "RateOfReturn": 0.04,
+          "RiskLevel": 1,
+          "CurrentBalance": 850000,
+          "WaterfallToleranceMonths": 1,
+          "TransitionPeriodMonths": 1
+        }
+      ],
+      "CapitalChangeEvents": [
+        {
+          "Name": "Monthly Budget",
+          "Amount": -18000.00,
+          "Frequency": "Monthly",
+          "ChangeType": "Expense"
+        },
+        {
+          "Name": "Travel",
+          "Amount": -7500.00,
+          "Frequency": "Quarterly",
+          "ChangeType": "Expense",
+          "EndDate": "2051-03-01"
+        },
+        {
+          "Name": "Gross Salary",
+          "Amount": 10000.00,
+          "Frequency": "Monthly",
+          "EndDate": "2024-03-01",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Annuity",
+          "Amount": 570.00,
+          "Frequency": "Monthly",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Social Security",
+          "Amount": 3514.00,
+          "Frequency": "Monthly",
+          "StartDate": "2038-06-01",
+          "ChangeType": "RegularIncome"
+        },
+        {
+          "Name": "Social Security",
+          "Amount": 2842.00,
+          "Frequency": "Monthly",
+          "StartDate": "2040-07-01",
+          "ChangeType": "RegularIncome"
+        }
+      ],
+      "TaxBrackets": [
+        {
+          "FilingStatus": "Single",
+          "TaxableIncomeBrackets": [
+            {
+              "LowerBound": 0,
+              "UpperBound": 9950,
+              "Rate": 0.1
+            },
+            {
+              "LowerBound": 9950,
+              "UpperBound": 40525,
+              "Rate": 0.12
+            },
+            {
+              "LowerBound": 40525,
+              "UpperBound": 86375,
+              "Rate": 0.22
+            },
+            {
+              "LowerBound": 86375,
+              "UpperBound": 164925,
+              "Rate": 0.24
+            },
+            {
+              "LowerBound": 164925,
+              "UpperBound": 209425,
+              "Rate": 0.32
+            },
+            {
+              "LowerBound": 209425,
+              "UpperBound": 523600,
+              "Rate": 0.35
+            },
+            {
+              "LowerBound": 523600,
+              "UpperBound": 769050,
+              "Rate": 0.37
+            }
+          ]
+        },
+        {
+          "FilingStatus": "MarriedFilingJointly",
+          "TaxableIncomeBrackets": [
+            {
+              "LowerBound": 0,
+              "UpperBound": 19900,
+              "Rate": 0.1
+            },
+            {
+              "LowerBound": 19900,
+              "UpperBound": 81050,
+              "Rate": 0.12
+            },
+            {
+              "LowerBound": 81050,
+              "UpperBound": 172750,
+              "Rate": 0.22
+            },
+            {
+              "LowerBound": 172750,
+              "UpperBound": 329850,
+              "Rate": 0.24
+            },
+            {
+              "LowerBound": 329850,
+              "UpperBound": 418850,
+              "Rate": 0.32
+            },
+            {
+              "LowerBound": 418850,
+              "UpperBound": 628300,
+              "Rate": 0.35
+            },
+            {
+              "LowerBound": 628300,
+              "UpperBound": 1000000,
+              "Rate": 0.37
+            }
+          ]
+        }
+      ]
+    }
+
+  ]
+}
