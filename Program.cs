@@ -7,8 +7,10 @@ namespace DieBroke;
 
 internal class Program
 {
-    static FinancialConfig financialConfig = new FinancialConfig();
-    static string filePath = "financialData.json";
+    static FinancialConfig? financialConfig = new FinancialConfig();
+    static TaxConfig? taxConfig = new TaxConfig();
+    static string financialDataJson = "financialData.json";
+    static string taxConfigJson = "taxConfig.json";
     static string outputPath = "FinancialSimulationResults.txt";
 
 
@@ -17,7 +19,7 @@ internal class Program
         // Read data from file
         try
         {
-            financialConfig = ReadFinancialConfig();
+            InitializeConfigFiles();
         }
         catch (Exception ex)
         {
@@ -77,9 +79,10 @@ internal class Program
         Console.WriteLine("Press enter to exit");
         Console.ReadLine();
     }
-    public static FinancialConfig ReadFinancialConfig()
+    public static void InitializeConfigFiles()
     {
-        string json = File.ReadAllText(filePath);
+        string financialConfigString = File.ReadAllText(financialDataJson);
+        string taxConfigString = File.ReadAllText(taxConfigJson);
 
         var settings = new JsonSerializerSettings
         {
@@ -88,10 +91,10 @@ internal class Program
             Converters = new List<JsonConverter> { new StringEnumConverter() }
         };
 
-        FinancialConfig? config;
         try
         {
-            config = JsonConvert.DeserializeObject<FinancialConfig>(json, settings);
+            financialConfig = JsonConvert.DeserializeObject<FinancialConfig>(financialConfigString, settings);
+            taxConfig = JsonConvert.DeserializeObject<TaxConfig>(taxConfigString, settings);
         }
         catch (JsonSerializationException jex)
         {
@@ -102,13 +105,16 @@ internal class Program
             throw new Exception(string.Format("Exception occurred when deserializing object {0}\n", ex?.Message), ex);
         }
 
-        if (config == null)
+        if (financialConfig is null)
         {
             throw new InvalidOperationException("Failed to deserialize the JSON into a FinancialConfig object.");
         }
-        Console.WriteLine($"[{GetLineNumber()}]FinancialConfig deserialized from JSON:");
-        Console.WriteLine(config.ToString());
-        return config!;
+        if (taxConfig is null)
+        {
+            throw new InvalidOperationException("Failed to deserialize the JSON into a TaxBracket object.");
+        }
+        Console.WriteLine($"[{GetLineNumber()}]Config Files are deserialized from JSON:");
+        Console.WriteLine(financialConfig.ToString());
     }
     static void UpdateInvestments(DateTime currentDate, FinancialConfig.Scenario financialConfig)
     {
@@ -427,14 +433,15 @@ internal class Program
 
         //calculate taxes owed based on tax brackets and income
         //Get the Tax Brackets based on filing status
-        FinancialConfig.Scenario.TaxBracket? bracket = financialConfig.TaxBrackets?.Where(x => x.FilingStatus == financialConfig.TaxFilingStatus).FirstOrDefault();
+        TaxBracketType? bracket = taxConfig?.TaxBracketTypes?.Where(x => x.FilingStatus == financialConfig.TaxFilingStatus).FirstOrDefault();
+
         if (bracket is null)
             throw new Exception("No tax bracket found for filing status");
 
-        if (bracket.TaxableIncomeBrackets is null)
+        if (bracket.TaxBrackets is null)
             throw new Exception("No taxable income brackets found for filing status");
 
-        foreach (var taxBracket in bracket.TaxableIncomeBrackets)
+        foreach (var taxBracket in bracket.TaxBrackets)
         {
             //if the current year income is greater than the current bracket upper limit, calculate taxes owed for this bracket
             if (taxableIncome > taxBracket.UpperBound)

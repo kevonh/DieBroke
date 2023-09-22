@@ -25,7 +25,7 @@ public class FinancialConfig
 
         public List<InvestmentVehicle>? InvestmentVehicles { get; set; }
         public List<CapitalChangeEvent>? CapitalChangeEvents { get; set; }
-        public List<TaxBracket>? TaxBrackets { get; set; }
+        public List<TaxBracketType>? TaxBrackets { get; set; }
         public List<FinancialState> YearlyHistory { get; set; } = new List<FinancialState>();
 
         public decimal NetWorth
@@ -93,19 +93,6 @@ public class FinancialConfig
                     return $"{Name},{Amount:C}";
                 else return "";
             }
-        }
-
-        public class TaxBracket
-        {
-            public string FilingStatus { get; set; } = "MarriedFilingJointly"; // Type of income (e.g., "Single" or "MarriedFilingJointly")
-            public List<TaxableIncomeBrackets>? TaxableIncomeBrackets { get; set; } // List of taxable income brackets
-        }
-
-        public class TaxableIncomeBrackets
-        {
-            public decimal LowerBound { get; set; } // Lower bound of the bracket
-            public decimal UpperBound { get; set; } // Upper bound of the bracket
-            public decimal Rate { get; set; } // Tax rate for the bracket
         }
 
         //Class to track year over year data
